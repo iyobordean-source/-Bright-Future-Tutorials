@@ -1,0 +1,253 @@
+.dashboard {
+  min-height: 100svh;
+  background: var(--paper);
+}
+
+/* ---------- Top bar ---------- */
+
+.dash-topbar {
+  background: var(--navy-deep);
+  border-bottom: 1px solid rgba(250, 247, 241, 0.08);
+}
+
+.dash-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+.dash-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.dash-brand .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(250, 247, 241, 0.1);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.dash-brand-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--paper);
+}
+
+.dash-brand-sub {
+  font-size: 12.5px;
+  color: rgba(250, 247, 241, 0.55);
+  margin-top: 1px;
+}
+
+.dash-topbar .btn-outline {
+  border-color: rgba(250, 247, 241, 0.3);
+  color: var(--paper);
+}
+
+.dash-topbar .btn-outline:hover {
+  background: rgba(250, 247, 241, 0.1);
+  border-color: rgba(250, 247, 241, 0.5);
+}
+
+/* ---------- Content ---------- */
+
+.dash-content {
+  padding: 36px 24px 64px;
+}
+
+.dash-heading h1 {
+  font-size: 26px;
+}
+
+.dash-heading p {
+  margin-top: 6px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+
+/* ---------- Stats ---------- */
+
+.stats-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 20px 18px;
+}
+
+.stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+
+.stat-icon-navy {
+  background: #eaeef6;
+  color: var(--navy);
+}
+
+.stat-icon-green {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.stat-icon-amber {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.stat-icon-gold {
+  background: var(--gold-bg);
+  color: var(--gold-deep);
+}
+
+.stat-value {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--navy-deep);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+/* ---------- Table card ---------- */
+
+.table-card {
+  margin-top: 28px;
+  padding: 20px;
+}
+
+.table-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: var(--paper);
+  color: var(--ink-faint);
+}
+
+.search-input input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  color: var(--ink);
+  font-size: 14.5px;
+}
+
+.status-select {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 760px;
+}
+
+.student-table th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: none;
+  color: var(--ink-faint);
+  font-weight: 700;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.student-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.student-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cell-name {
+  font-weight: 600;
+  color: var(--navy-deep);
+  white-space: nowrap;
+}
+
+.cell-subjects {
+  max-width: 220px;
+  color: var(--ink-soft);
+}
+
+.table-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .dash-content {
+    padding: 24px 16px 48px;
+  }
+
+  .dash-brand-name {
+    font-size: 13.5px;
+  }
+
+  .table-card {
+    padding: 14px;
+  }
+}

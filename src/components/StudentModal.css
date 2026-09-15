@@ -1,0 +1,121 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 27, 54, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+
+.modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 32px 28px 28px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--line-soft);
+  color: var(--ink-soft);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.modal-head {
+  padding-right: 32px;
+}
+
+.modal-id {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.modal-head h2 {
+  font-size: 22px;
+  margin: 6px 0 10px;
+}
+
+.modal-details {
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.modal-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-row dt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.modal-row dd {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink);
+  text-align: right;
+  font-weight: 500;
+}
+
+.modal-row-subjects {
+  align-items: flex-start;
+}
+
+.modal-subject-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.subject-chip {
+  background: var(--gold-bg);
+  color: var(--gold-deep);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.modal-panel .btn {
+  margin-top: 26px;
+}

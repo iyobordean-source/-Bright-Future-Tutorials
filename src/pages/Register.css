@@ -1,0 +1,57 @@
+.register-page {
+  padding: 56px 0 80px;
+}
+
+.register-container {
+  max-width: 640px;
+}
+
+.register-intro h1 {
+  font-size: 32px;
+}
+
+.register-intro p {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  max-width: 52ch;
+}
+
+.register-form {
+  margin-top: 32px;
+  padding: 32px;
+}
+
+.radio-tile {
+  align-items: flex-start;
+}
+
+.radio-tile span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.radio-tile strong {
+  font-size: 14.5px;
+  color: var(--navy-deep);
+}
+
+.radio-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.register-form .btn-block {
+  margin-top: 8px;
+}
+
+@media (max-width: 560px) {
+  .register-form {
+    padding: 22px;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

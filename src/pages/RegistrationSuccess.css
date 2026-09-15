@@ -1,0 +1,42 @@
+.success-page {
+  padding: 72px 0;
+  display: flex;
+  align-items: center;
+}
+
+.success-container {
+  display: flex;
+  justify-content: center;
+}
+
+.success-card {
+  max-width: 480px;
+  padding: 44px 40px;
+  text-align: center;
+}
+
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--green-bg);
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+.success-card h1 {
+  font-size: 24px;
+}
+
+.success-card p {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.success-card .btn {
+  margin-top: 28px;
+}
