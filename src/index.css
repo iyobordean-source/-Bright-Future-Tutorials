@@ -324,3 +324,19 @@ img {
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
+/* ---------- Full-page route loading state ---------- */
+
+.route-loading {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.route-loading .spin-icon {
+  color: var(--navy-soft);
+}

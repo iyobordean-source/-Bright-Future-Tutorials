@@ -1,56 +1,110 @@
-import { createContext, useContext, useMemo, useState } from 'react'
-import { sampleStudents } from '../data/sampleStudents'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from 'firebase/auth'
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  updateDoc,
+  doc,
+  query,
+  orderBy,
+} from 'firebase/firestore'
+import { auth, db } from '../firebase'
 
 const AppContext = createContext(null)
 
-// Demo-only credentials. Firebase auth will replace this later.
-export const DEMO_ADMIN_EMAIL = 'admin@brightfuture.ng'
-export const DEMO_ADMIN_PASSWORD = 'admin123'
+// The one account allowed into the admin dashboard, matched by email
+// against whoever Firebase Auth reports as signed in (email/password or
+// Google — either way works as long as the email matches).
+export const ADMIN_EMAIL = 'iyobordean@gmail.com'
 
-let nextIdNumber = 1011
+const googleProvider = new GoogleAuthProvider()
 
 export function AppProvider({ children }) {
-  const [students, setStudents] = useState(sampleStudents)
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
+  const [students, setStudents] = useState([])
+  const [studentsLoading, setStudentsLoading] = useState(true)
 
-  const addStudent = (formData) => {
+  const [currentUser, setCurrentUser] = useState(null)
+  const [authLoading, setAuthLoading] = useState(true)
+
+  // Keep the signed-in user in sync with Firebase, including on page refresh.
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user)
+      setAuthLoading(false)
+    })
+    return unsubscribe
+  }, [])
+
+  // Live-sync the students collection so the dashboard, and any place that
+  // reads `students`, always reflects Firestore without a manual refetch.
+  useEffect(() => {
+    const studentsQuery = query(collection(db, 'students'), orderBy('registrationDate', 'desc'))
+    const unsubscribe = onSnapshot(
+      studentsQuery,
+      (snapshot) => {
+        setStudents(snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() })))
+        setStudentsLoading(false)
+      },
+      (error) => {
+        console.error('Failed to load students from Firestore:', error)
+        setStudentsLoading(false)
+      }
+    )
+    return unsubscribe
+  }, [])
+
+  const addStudent = async (formData) => {
     const newStudent = {
-      id: `BFT-${nextIdNumber++}`,
       ...formData,
       registrationDate: new Date().toISOString().slice(0, 10),
       paymentStatus: 'Pending',
       isNewRegistration: true,
     }
-    setStudents((prev) => [newStudent, ...prev])
+    await addDoc(collection(db, 'students'), newStudent)
+    // The onSnapshot listener above will pick up the new document
+    // automatically — we just return the submitted data for the
+    // Registration Success page to use immediately.
     return newStudent
   }
 
-  const markAsPaid = (id) => {
-    setStudents((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, paymentStatus: 'Paid' } : s))
-    )
+  const markAsPaid = async (id) => {
+    await updateDoc(doc(db, 'students', id), { paymentStatus: 'Paid' })
   }
 
-  const login = (email, password) => {
-    if (email.trim().toLowerCase() === DEMO_ADMIN_EMAIL && password === DEMO_ADMIN_PASSWORD) {
-      setIsAdminAuthenticated(true)
-      return true
-    }
-    return false
+  const loginWithEmail = (email, password) => {
+    return signInWithEmailAndPassword(auth, email.trim(), password)
   }
 
-  const logout = () => setIsAdminAuthenticated(false)
+  const loginWithGoogle = () => {
+    return signInWithPopup(auth, googleProvider)
+  }
+
+  const logout = () => signOut(auth)
+
+  const isAdminAuthenticated =
+    Boolean(currentUser) && currentUser.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()
 
   const value = useMemo(
     () => ({
       students,
+      studentsLoading,
       addStudent,
       markAsPaid,
+      currentUser,
+      authLoading,
       isAdminAuthenticated,
-      login,
+      loginWithEmail,
+      loginWithGoogle,
       logout,
     }),
-    [students, isAdminAuthenticated]
+    [students, studentsLoading, currentUser, authLoading, isAdminAuthenticated]
   )
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

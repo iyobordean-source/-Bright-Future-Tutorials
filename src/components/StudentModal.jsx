@@ -1,7 +1,7 @@
-import { X, Phone, CalendarDays, BookOpen, Laptop } from 'lucide-react'
+import { X, Phone, CalendarDays, BookOpen, Laptop, Loader2, AlertCircle } from 'lucide-react'
 import './StudentModal.css'
 
-export default function StudentModal({ student, onClose, onMarkAsPaid }) {
+export default function StudentModal({ student, onClose, onMarkAsPaid, markingPaid, markPaidError }) {
   if (!student) return null
 
   const formattedDate = new Date(student.registrationDate).toLocaleDateString('en-NG', {
@@ -74,13 +74,28 @@ export default function StudentModal({ student, onClose, onMarkAsPaid }) {
           </div>
         </dl>
 
+        {markPaidError && (
+          <div className="alert-banner" role="alert">
+            <AlertCircle size={16} />
+            <span>{markPaidError}</span>
+          </div>
+        )}
+
         {student.paymentStatus === 'Pending' && (
           <button
             type="button"
             className="btn btn-primary btn-block"
             onClick={() => onMarkAsPaid(student.id)}
+            disabled={markingPaid}
           >
-            Mark as Paid
+            {markingPaid ? (
+              <>
+                <Loader2 size={16} className="spin-icon" aria-hidden="true" />
+                Marking as Paid...
+              </>
+            ) : (
+              'Mark as Paid'
+            )}
           </button>
         )}
       </div>

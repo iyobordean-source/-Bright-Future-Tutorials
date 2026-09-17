@@ -6,6 +6,7 @@ export const sampleStudents = [
     parentName: 'Mrs. Ifeoma Okafor',
     parentPhone: '08023456781',
     level: 'SS2',
+    academicTrack: 'Science',
     subjects: ['Physics', 'Chemistry', 'Biology'],
     learningOption: 'In-Center',
     registrationDate: '2026-08-03',
@@ -17,8 +18,9 @@ export const sampleStudents = [
     studentName: 'Tobiloba Adewale',
     parentName: 'Mr. Kunle Adewale',
     parentPhone: '07098765432',
-    level: 'JSS3',
-    subjects: ['Mathematics', 'English Language', 'Basic Science'],
+    level: 'SS1',
+    academicTrack: 'Arts',
+    subjects: ['English Language', 'Government', 'Literature-in-English'],
     learningOption: 'Online',
     registrationDate: '2026-08-05',
     paymentStatus: 'Pending',
@@ -30,6 +32,7 @@ export const sampleStudents = [
     parentName: 'Mrs. Amaka Eze',
     parentPhone: '08134567890',
     level: 'SS3',
+    academicTrack: 'Social Science',
     subjects: ['Mathematics', 'Economics', 'Government'],
     learningOption: 'In-Center',
     registrationDate: '2026-08-11',
@@ -41,8 +44,9 @@ export const sampleStudents = [
     studentName: 'Ibrahim Musa',
     parentName: 'Alhaji Musa Danladi',
     parentPhone: '09056781234',
-    level: 'JSS1',
-    subjects: ['Mathematics', 'English Language'],
+    level: 'SS1',
+    academicTrack: 'Science',
+    subjects: ['Mathematics', 'Physics', 'Chemistry'],
     learningOption: 'In-Center',
     registrationDate: '2026-08-14',
     paymentStatus: 'Pending',
@@ -53,8 +57,9 @@ export const sampleStudents = [
     studentName: 'Blessing Nwachukwu',
     parentName: 'Mrs. Grace Nwachukwu',
     parentPhone: '08187654321',
-    level: 'Primary 6',
-    subjects: ['Mathematics', 'English Language', 'Verbal Reasoning'],
+    level: 'SS2',
+    academicTrack: 'Arts',
+    subjects: ['English Language', 'Literature-in-English', 'History'],
     learningOption: 'In-Center',
     registrationDate: '2026-08-19',
     paymentStatus: 'Paid',
@@ -66,6 +71,7 @@ export const sampleStudents = [
     parentName: 'Mr. Chukwuemeka Obi',
     parentPhone: '07045678912',
     level: 'SS1',
+    academicTrack: 'Science',
     subjects: ['Physics', 'Further Mathematics', 'Chemistry'],
     learningOption: 'Online',
     registrationDate: '2026-08-22',
@@ -77,8 +83,9 @@ export const sampleStudents = [
     studentName: 'Fatima Bello',
     parentName: 'Mrs. Hauwa Bello',
     parentPhone: '08023987654',
-    level: 'JSS2',
-    subjects: ['Mathematics', 'English Language', 'Basic Science'],
+    level: 'SS2',
+    academicTrack: 'Social Science',
+    subjects: ['Mathematics', 'Economics', 'Civic Education'],
     learningOption: 'In-Center',
     registrationDate: '2026-08-27',
     paymentStatus: 'Paid',
@@ -90,6 +97,7 @@ export const sampleStudents = [
     parentName: 'Mr. Rotimi Ogundipe',
     parentPhone: '09134567821',
     level: 'SS3',
+    academicTrack: 'Science',
     subjects: ['Biology', 'Chemistry', 'Agricultural Science'],
     learningOption: 'In-Center',
     registrationDate: '2026-09-02',
@@ -101,8 +109,9 @@ export const sampleStudents = [
     studentName: 'Chidinma Umeh',
     parentName: 'Mrs. Ogechi Umeh',
     parentPhone: '08167891234',
-    level: 'Primary 5',
-    subjects: ['Mathematics', 'English Language'],
+    level: 'SS1',
+    academicTrack: 'Arts',
+    subjects: ['English Language', 'Literature-in-English', 'Government'],
     learningOption: 'Online',
     registrationDate: '2026-09-06',
     paymentStatus: 'Pending',
@@ -113,8 +122,9 @@ export const sampleStudents = [
     studentName: 'Yusuf Abdullahi',
     parentName: 'Mallam Abdullahi Sani',
     parentPhone: '07056123489',
-    level: 'JSS3',
-    subjects: ['Mathematics', 'English Language', 'Basic Science'],
+    level: 'SS3',
+    academicTrack: 'Social Science',
+    subjects: ['Mathematics', 'Government', 'Geography'],
     learningOption: 'In-Center',
     registrationDate: '2026-09-10',
     paymentStatus: 'Pending',
@@ -122,32 +132,36 @@ export const sampleStudents = [
   },
 ]
 
-export const classLevels = [
-  'Primary 4',
-  'Primary 5',
-  'Primary 6',
-  'JSS1',
-  'JSS2',
-  'JSS3',
-  'SS1',
-  'SS2',
-  'SS3',
+export const classLevels = ['SS1', 'SS2', 'SS3']
+
+export const academicTracks = ['Science', 'Arts', 'Social Science']
+
+// Grouped for display in the registration form. Subjects are still a plain
+// multi-select — grouping is only to make a long list easier to scan, not a
+// track-to-subject rules engine.
+export const subjectGroups = [
+  {
+    label: 'Core Subjects',
+    subjects: ['Mathematics', 'English Language', 'Civic Education'],
+  },
+  {
+    label: 'Science',
+    subjects: [
+      'Physics',
+      'Chemistry',
+      'Biology',
+      'Further Mathematics',
+      'Agricultural Science',
+      'Geography',
+    ],
+  },
+  {
+    label: 'Arts & Social Science',
+    subjects: ['Economics', 'Government', 'Literature-in-English', 'History'],
+  },
 ]
 
-export const subjectOptions = [
-  'Mathematics',
-  'English Language',
-  'Basic Science',
-  'Physics',
-  'Chemistry',
-  'Biology',
-  'Economics',
-  'Government',
-  'Further Mathematics',
-  'Agricultural Science',
-  'Geography',
-  'Literature in English',
-]
+export const subjectOptions = subjectGroups.flatMap((group) => group.subjects)
 
 export const learningOptions = [
   {
